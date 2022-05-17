@@ -26,11 +26,13 @@ public class Q4 {
         driver.get("https://testpages.herokuapp.com/styled/index.html");
 
         driver.findElement(By.id("calculatetest")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.id("number1")).sendKeys("20");
-        driver.findElement(By.id("number2")).sendKeys("30");
+        driver.findElement(By.id("number1")).sendKeys("15");
+        driver.findElement(By.id("number2")).sendKeys("10");
         driver.findElement(By.id("calculate")).click();
-        System.out.println(driver.findElement(By.id("answer")).getText());
+        WebElement answer = driver.findElement(By.xpath("//span[@id='answer']"));
+        System.out.println(answer.getText());
+
+
     }
 
 }

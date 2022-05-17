@@ -1,5 +1,6 @@
 package practice;
 
+import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -23,39 +24,40 @@ public class Q2 {
     //  13-En son adim olarak butun sayfalarimizi kapatmis olalim
 
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","src/resources/drivers/chromedriver.exe" );
+        System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://www.sahibinden.com");
-        Thread.sleep(10000);
 
-        String sahibindenTitle = driver.getTitle();
-        System.out.println("sahibindenTitle = " + sahibindenTitle);
+        driver.get("https://www.sahibinden.com/");
+        String actualURL = driver.getCurrentUrl();
+        String actualTitle = driver.getTitle();
+        String arananKelime = "Oto";
 
-        String sahibindenUrl = driver.getCurrentUrl();
-        System.out.println("sahibindenUrl = " + sahibindenUrl);
+        if (actualURL.contains(arananKelime)) {
+            System.out.println("URL Test PASSED");
+        } else {
+            System.out.println("URL Test FAILED");
+        }
 
-        if(sahibindenTitle.contains("Oto") && sahibindenUrl.contains("Oto")){
-            System.out.println("Oto yazisi vardir");
-        }else System.out.println("Oto yazisi yoktur..");
+        if (actualTitle.contains(arananKelime)) {
+            System.out.println("Title Test PASSED");
+        } else {
+            System.out.println("Title Test FAILED");
+        }
+        driver.navigate().to("https://www.gittigidiyor.com/");
+        String actualTitle2 = driver.getTitle();
+        String arananKelime2 = "Sitesi";
 
-        driver.get("https://www.gittigidiyor.com");
+        if (actualTitle2.contains(arananKelime2)) {
+            System.out.println("Title Test2 PASSED");
+        } else {
+            System.out.println("Title Test2 FAILED");
+        }
 
-        String gittiTitle = driver.getTitle();
-        System.out.println(gittiTitle);
-
-        boolean isTrue = driver.getTitle().contains("Sitesi");
-        if (isTrue) System.out.println("Test Passed");
-        else System.out.println("Test Failed");
-
-      //  System.out.println(gittiTitle.contains("Sitesi") ? "Passed" : "Failed");
-
-        System.out.println();
         driver.navigate().back();
         driver.navigate().refresh();
         driver.navigate().forward();
         driver.close();
-        driver.quit();
     }
 }

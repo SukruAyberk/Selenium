@@ -2,7 +2,9 @@ package practice;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -28,39 +30,23 @@ public class Q3 {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.get("https://www.techlistic.com/p/selenium-practice-form.html");
+        driver.findElement(By.id("cookieChoiceDismiss")).click();
 
-        driver.manage().deleteAllCookies();// bu sitede ise yaramadı..
-        driver.findElement(By.xpath("//a[@id ='cookieChoiceDismiss']")).click(); //cerezleri kabul ettim..
+        WebElement firstName = driver.findElement(By.xpath("//input[@name='firstname']"));
+        firstName.sendKeys("berk");
+        WebElement lastName = driver.findElement(By.xpath("//input[@name='lastname']"));
+        lastName.sendKeys("berkü");
+        driver.findElement(By.xpath("//input[@id='sex-0']")).click();
+        driver.findElement(By.xpath("//input[@id='profession-1']")).click();
+        driver.findElement(By.xpath("//input[@id='tool-2']")).click();
 
-        //fill the firstname
-        driver.findElement(By.name("firstname")).sendKeys("Elif");
+        WebElement dropDownMenu = driver.findElement(By.xpath("(//select[@class='input-xlarge'])[1]"));
+        Select select = new Select(dropDownMenu);
+        select.selectByVisibleText("Antartica");
 
-        //fill the lastname
-        driver.findElement(By.name("lastname")).sendKeys("Celik");
+        driver.findElement(By.xpath("//*[text()='Browser Commands']")).click();
 
-        //check the gender
-        driver.findElement(By.xpath("//input[@id ='sex-1']")).click();
-
-        //check the experience
-        driver.findElement(By.id("exp-2")).click();
-
-        //fill the date
-        driver.findElement(By.id("datepicker")).sendKeys("16/05/2022");
-
-        //choose your profession -> Automation Tester
-        driver.findElement(By.id("profession-1")).click();
-
-        //choose your tool -> Selenium Webdriver
-        driver.findElement(By.id("tool-2")).click();
-
-        //choose your continent -> Antartica
-        driver.findElement(By.xpath("//option[.='Antartica']")).click();
-
-        //choose your command  -> Browser Commands
-        driver.findElement(By.xpath("//option[text()='Browser Commands']")).click();
-
-        //click submit button
-        driver.findElement(By.xpath("//button[@id='submit']")).click();
+        driver.findElement(By.xpath("//button[@class='btn btn-info']")).click();
 
     }
 }
