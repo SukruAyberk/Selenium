@@ -31,12 +31,11 @@ public class Q4_WithPageDown {
         js.executeScript("window.scrollBy(0,300)"); // sayfada 300 piksel asagi in demektir..
 
         driver.findElement(By.id("calculatetest")).click();
-
-
-        driver.findElement(By.id("number1")).sendKeys("20");
-        driver.findElement(By.id("number2")).sendKeys("30");
+        driver.findElement(By.id("number1")).sendKeys("15");
+        driver.findElement(By.id("number2")).sendKeys("10");
         driver.findElement(By.id("calculate")).click();
-        System.out.println(driver.findElement(By.id("answer")).getText());
+        WebElement answer = driver.findElement(By.xpath("//span[@id='answer']"));
+        System.out.println(answer.getText());
     }
 
 }
